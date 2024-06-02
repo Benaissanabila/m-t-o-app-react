@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-meteoappreact-dev-da362-authRole",
+      "UnauthRoleArn": "arn:aws:iam::730335385340:role/amplify-meteoappreact-dev-da362-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::730335385340:role/amplify-meteoappreact-dev-da362-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-meteoappreact-dev-da362-deployment",
+      "UnauthRoleName": "amplify-meteoappreact-dev-da362-unauthRole",
+      "StackName": "amplify-meteoappreact-dev-da362",
+      "StackId": "arn:aws:cloudformation:us-east-1:730335385340:stack/amplify-meteoappreact-dev-da362/e240cc00-2112-11ef-8aa8-0ebf2d25491d",
+      "AmplifyAppId": "dr5eel32a74hf"
+    }
+  }
+}
