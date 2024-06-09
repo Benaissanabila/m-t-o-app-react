@@ -5,7 +5,7 @@ export const Emojis = {
     sunset: "🌇",
     calandar: "📅",
     sunrise: "🌅",
-    cloud: "☁️",
+    cloud: "🌤️",
     wind: "💨",
     hot: "🌡️"
 } as const;
