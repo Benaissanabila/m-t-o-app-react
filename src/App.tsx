@@ -1,8 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './App.css';
+
 import Today from "./components/Today";
 import WeekDay from "./components/WeekDay";
 import { GeoLocation, WeatherData, WeatherUnits, DailyData, formatWeatherDataDaily } from './utils/utils';
+
+
 
 const App: React.FC = () => {
 
@@ -63,8 +66,8 @@ const App: React.FC = () => {
 
     if (isLoading) {
       return (
-          <div>
-            <p>Chargement...</p>
+          <div className={"min-h-screen h-max bg-cyan-600 flex justify-center items-start p-8 md:px-20"}>
+            <p className={"text-center "}>Chargement...</p>
           </div>
       );
     }
@@ -72,23 +75,23 @@ const App: React.FC = () => {
     if (error) {
       return (
           <div>
-            <p>Une erreur est survenue lors de la récupération des prévisions météorologiques...</p>
+            <p className={"text-center text-red-500 "}>Une erreur est survenue lors de la récupération des prévisions météorologiques...</p>
           </div>
       );
     }
 
     return (
-        <div className="">
-          <div>
-            {dailyWeather.length > 0 && (
-                <Today data={dailyWeather[0]} weatherUnits={weatherUnits} />
+        <div >
+          <div className={"min-h-screen h-max bg-cyan-600 flex  justify-center items-start p-8 md:px-20"}>
+              <div className={"w-full-max-w-7xl bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg shadow-lg p-4 md:px-12 md:py-8 xl:py-12 xl:px:-28"}>{dailyWeather.length > 0 && (
+                  < Today data={dailyWeather[0]} weatherUnits={weatherUnits} />
             )}
-            <div>
+            <div className={"grid grid-cols-1 gap-6 md:grid-cols-3 xl:grid-cols-6 "}>
               {dailyWeather.length > 1 && dailyWeather.slice(1).map((data, index) => (
                   <WeekDay key={index} data={data} weatherUnits={weatherUnits} />
               ))}
             </div>
-          </div>
+          </div></div>
         </div>
     );
   }

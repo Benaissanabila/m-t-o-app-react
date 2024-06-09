@@ -1,3 +1,11 @@
+/* Importation des styles de base */
+@import 'tailwindcss/base';
+
+/* Importation des composants */
+@import 'tailwindcss/components';
+
+/* Importation des utilitaires */
+@import 'tailwindcss/utilities';
 .App {
   text-align: center;
 }
