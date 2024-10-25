@@ -9,14 +9,16 @@ interface WeekDayProps {
 }
 
 const WeekDay: React.FC<WeekDayProps> = ({ data, weatherUnits }) => {
-    const [weatherEmojis, setWeatherEmojis] = useState("")
+    const [weatherEmojisWeek, setWeatherEmojisWeek] = useState("")
     const [averageTemperature, setAverageTemperature] = useState<number | undefined>(undefined)
+
+
     useEffect(() => {
         if (!data) return;
         const avTemp = parseFloat(((data.temperature_2m_max + data.temperature_2m_min) / 2).toFixed(1));
         const weatherEmojis = getEmojies(avTemp,data.precipitation_sum,data.wind_speed_10m_max);
         setAverageTemperature(avTemp)
-        setWeatherEmojis(weatherEmojis)
+        setWeatherEmojisWeek(weatherEmojis)
     }, [data]);
     if (!data || !weatherUnits.temperature) {
         return <div className={"text-2xl text-center text-red-500 "}>Erreur...</div>
@@ -25,6 +27,8 @@ const WeekDay: React.FC<WeekDayProps> = ({ data, weatherUnits }) => {
     const formattedSunrise = formateDateToHourMinutes(sunriseDate);
     const dataSunset = new Date (data.sunset)
     const formattedSunset = formateDateToHourMinutes(dataSunset);
+
+
     return (
         <div
             className={"text-center p-6 rounded-md bg-white/30 shadow-md flex justify-center items-center md:flex-col"}>
@@ -32,7 +36,7 @@ const WeekDay: React.FC<WeekDayProps> = ({ data, weatherUnits }) => {
             <p> {data.time}</p>
             <p className={"ml-6 md:mb-4 md:ml-0"}>{averageTemperature}<span
                 className={"text-xs font-semibold"}>{weatherUnits.temperature}</span></p>
-            <div className={"ml-6 text-5xl"}>{weatherEmojis && <div>{weatherEmojis}</div>}</div>
+            <div className={"ml-6 text-5xl"}>{weatherEmojisWeek && <div>{weatherEmojisWeek}</div>}</div>
             {/*<p>Lever du soleil: {formattedSunrise}</p>*/}
             {/*<p>Coucher du soleil: {formattedSunset}</p>*/}
             {/*<p>Précipitations: {data.precipitation_sum} {weatherUnits.rain}</p>*/}

@@ -13,6 +13,8 @@ const App: React.FC = () => {
     const [dailyWeather, setDailyWeather] = useState<DailyData[]>([]);
     const [searchQuery, setSearchQuery] = useState('');
 
+
+
     const fetchWeatherByCoordinates = useCallback(async (latitude: number, longitude: number) => {
         setError(false);
         try {
@@ -22,6 +24,7 @@ const App: React.FC = () => {
                 setError(true);
             } else {
                 const formattedDailyData = formatWeatherDataDaily(data.daily);
+                console.log(data.daily)
                 setDailyWeather(formattedDailyData);
                 setWeatherUnits({
                     rain: data.daily_units.precipitation_sum,
@@ -50,6 +53,8 @@ const App: React.FC = () => {
         }
     }, [fetchWeatherByCoordinates]);
 
+
+
     useEffect(() => {
         setIsLoading(true);
         if (!navigator.geolocation) {
@@ -74,11 +79,13 @@ const App: React.FC = () => {
         }
     }, [fetchWeatherByCoordinates, geoLoc.latitude, geoLoc.longitude]);
 
-    const handleSearch = () => {
+    const handleSearch = async () => {
         if (searchQuery.trim() !== '') {
-            fetchWeatherByCountry(searchQuery);
+            await fetchWeatherByCountry(searchQuery);
         }
     };
+
+
 
     if (isLoading) {
         return (
@@ -99,13 +106,14 @@ const App: React.FC = () => {
     return (
         <div>
             <div className={"min-h-screen h-max bg-cyan-600 flex justify-center items-start p-8 md:px-20"}>
-                <div className={"w-full-max-w-7xl bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg shadow-lg p-4 md:px-12 md:py-8 xl:py:-28"}>
+                <div
+                    className={"w-full-max-w-7xl bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg shadow-lg p-4 md:px-12 md:py-8 xl:py:-28"}>
                     <input
                         type="text"
                         placeholder="Entrez le nom du pays"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className={"bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent rounded-lg px-4 py-2 mb-4 w-full"}
+                        className={"bg-white m-5 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent rounded-lg px-4 py-2 mb-4 w-60"}
                     />
                     <button
                         onClick={handleSearch}
@@ -113,14 +121,16 @@ const App: React.FC = () => {
                     >
                         Rechercher
                     </button>
+
                     {dailyWeather.length > 0 && (
-                        <Today data={dailyWeather[0]} weatherUnits={weatherUnits} />
+                        <Today data={dailyWeather[0]} weatherUnits={weatherUnits}/>
                     )}
                     <div className={"grid grid-cols-1 gap-6 md:grid-cols-3 xl:grid-cols-6"}>
                         {dailyWeather.length > 1 && dailyWeather.slice(1).map((data, index) => (
-                            <WeekDay key={index} data={data} weatherUnits={weatherUnits} />
+                            <WeekDay key={index} data={data} weatherUnits={weatherUnits}/>
                         ))}
                     </div>
+
                 </div>
             </div>
         </div>
@@ -128,6 +138,7 @@ const App: React.FC = () => {
 }
 
 export default App;
+
 
 
 

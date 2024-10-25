@@ -26,7 +26,7 @@ const Today: React.FC<TodayProps> = ({ data, weatherUnits }) => {
     if (!data || !weatherUnits.temperature) {
         return <div>Données non disponibles</div>;
     }
-    const sunriseDate = new Date(data.sunrise); // Convertir la chaîne de caractères en objet Date
+    const sunriseDate = new Date(data.sunrise);
     const formattedSunrise = formateDateToHourMinutes(sunriseDate);
     return (
         <div className={"max-w-max mx-auto xl:ml-auto"}>
